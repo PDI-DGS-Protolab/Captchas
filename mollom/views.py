@@ -20,3 +20,7 @@ def checkCaptcha(request):
         return render(request, 'success.html')
     else:
         return render(request, 'failure.html')
+
+
+def index(request):
+    return render(request, 'index.html')

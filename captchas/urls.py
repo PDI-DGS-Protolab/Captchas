@@ -7,6 +7,7 @@ import recaptcha.views as recaptcha
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+                       url(r'^$', mollom.index),
                        url(r'^mollom/$', mollom.serveCaptcha),
                        url(r'^mollom/check$', mollom.checkCaptcha),
                        url(r'^recaptcha/$', recaptcha.serveCaptcha),
