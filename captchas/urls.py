@@ -1,13 +1,14 @@
 from django.conf.urls import patterns, include, url
-from mollom.views import serveCaptcha, checkCaptcha
+import mollom.views as mollom
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^mollom/$', serveCaptcha),
-                       url(r'^mollom/check$', checkCaptcha),
+                       url(r'^$', mollom.index),
+                       url(r'^mollom/$', mollom.serveCaptcha),
+                       url(r'^mollom/check$', mollom.checkCaptcha),
     # Examples:
     # url(r'^$', 'captchas.views.home', name='home'),
     # url(r'^captchas/', include('captchas.foo.urls')),
