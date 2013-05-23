@@ -1,0 +1,39 @@
+<html>
+
+    <head>
+        <title>Captcha Test</title>
+    </head>
+
+    <body>
+
+        <article>
+            <h1>Re-Captcha</h1>
+
+            <section>
+                <h2>Javascript AJAX API</h2>
+                <form method="POST" action="">
+
+                <script type="text/javascript" src="https://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+                <script type="text/javascript">
+                    var RecaptchaState = {
+                        server : 'https://www.google.com/recaptcha/api/'
+                    };
+
+                    function showRecaptcha(element) {
+                        Recaptcha.create("6Lf98eASAAAAAMARWX5AXv33iiHwS6E6I3tkVOFT", element, {
+                           tabindex: 1,
+                           theme: "clean",
+                           callback: Recaptcha.focus_response_field
+                        });
+                    }
+                </script>
+                <div id="captchadiv"></div>
+                <input type="button" value="Click Me" onclick="showRecaptcha('captchadiv');">
+
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

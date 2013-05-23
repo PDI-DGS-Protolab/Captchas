@@ -1,5 +1,7 @@
 import cherrypy
 from recaptcha.client import captcha
+
+
 class Main(object):
 
     # Display recaptcha form
@@ -7,18 +9,18 @@ class Main(object):
     def display_recaptcha(self, *args, **kwargs):
         public = "6Lf98eASAAAAAMARWX5AXv33iiHwS6E6I3tkVOFT"
         captcha_html = captcha.displayhtml(
-                           public,
-                           use_ssl=False,
-                           error="Something broke!")
+            public,
+            use_ssl=False,
+            error="Something broke!")
 
-        # You'll probably want to add error message handling here if you 
+        # You'll probably want to add error message handling here if you
         # have been redirected from a failed attempt
         return """
         <form action="validate">
         %s
         <input type=submit value="Submit Captcha Text" \>
         </form>
-        """%captcha_html
+        """ % captcha_html
 
     # send the recaptcha fields for validation
     @cherrypy.expose
@@ -32,10 +34,10 @@ class Main(object):
         if not "recaptcha_response_field" in kwargs:
             return "no recaptcha_response_field"
 
-        recaptcha_challenge_field  = kwargs["recaptcha_challenge_field"]
-        recaptcha_response_field  = kwargs["recaptcha_response_field"]
+        recaptcha_challenge_field = kwargs["recaptcha_challenge_field"]
+        recaptcha_response_field = kwargs["recaptcha_response_field"]
 
-        # response is just the RecaptchaResponse container class. You'll need 
+        # response is just the RecaptchaResponse container class. You'll need
         # to check is_valid and error_code
         response = captcha.submit(
             recaptcha_challenge_field,
@@ -52,7 +54,7 @@ class Main(object):
             # user knowwhy their submission failed (not handled above,
             # but you are smart :-) )
             raise cherrypy.HTTPRedirect(
-                "display_recaptcha?error=%s"%response.error_code)
+                "display_recaptcha?error=%s" % response.error_code)
 
 conf = {'/': {'tools.staticdir.on': True,
         'tools.staticdir.dir': '/Users/amg/python/captchas'}}
