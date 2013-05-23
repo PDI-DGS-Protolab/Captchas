@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mollom Captchas demo</title>
+</head>
+<body>
+
+	<form action="check" method="POST"> {% csrf_token %}
+		<input type="text" placeholder="Username">
+		<textarea name="" id="" cols="30" rows="10" placeholder="Comment"></textarea>
+		<img src="{{ captcha }}" alt="captcha image">
+		<input type="text" name="answer">
+		<input type="hidden" name="sessionID" value="{{ sessionID }}">
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
