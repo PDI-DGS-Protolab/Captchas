@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Mollom Captchas demo</title>
+    </head>
+
+    <body>
+
+        <form action="check" method="post"> {% csrf_token %}
+            <h1>Publish a post in our blog!</h1>
+
+            <input type="text" placeholder="Username" class="user">
+            <textarea name="comment" placeholder="Comment" class="comment"></textarea>
+
+            <div>
+                <p>Please, write the text you see in the next image</p>
+                {% autoescape off %}{{ captcha }}{% endautoescape %}
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+
+    </body>
+
+</html>
