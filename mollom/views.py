@@ -1,5 +1,6 @@
 from PyMollom.Mollom import MollomAPI
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 
 mollom_api = MollomAPI(
@@ -9,17 +10,30 @@ mollom_api = MollomAPI(
 
 
 def serveCaptcha(request):
-    captcha = mollom_api.getImageCaptcha(sessionID=None, authorIP="192.168.0.65")
-    print captcha
-    return render(request, 'mollom.html', {'captcha': captcha['url'], 'sessionID': captcha['session_id']})
+    return render(request, 'mollom.html')
+
+
+@csrf_protect
+def checkIfSpam(request):
+    data = request.POST
+    spam = (mollom_api.checkContent(authorName=data['username'], postBody=data['body']))['spam']
+    if(spam == 1):    # No es spam
+        resp = HttpResponse("ham", content_type="text/plain")
+    elif(spam == 2):  # Es spam
+        resp = HttpResponse("spam", content_type="text/plain")
+    elif(spam == 3):  # No es seguro que sea spam
+        captcha = mollom_api.getImageCaptcha(sessionID=None, authorIP=request.META['REMOTE_ADDR'])
+        resp = HttpResponse(captcha['url'], content_type="text/plain")
+    return resp
 
 
 @csrf_protect
 def checkCaptcha(request):
     if mollom_api.checkCaptcha(sessionID=request.POST['sessionID'], solution=request.POST['answer']):
-        return render(request, 'success.html')
+        resp = render(request, 'success.html')
     else:
-        return render(request, 'failure.html')
+        resp = render(request, 'failure.html')
+    return resp
 
 
 def index(request):
