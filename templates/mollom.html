@@ -4,56 +4,14 @@
 	<meta charset="UTF-8">
 	<title>Mollom Captchas demo</title>
 
-	<style>
-		.user {
-			width: 100%;
-		    height: 3em;
-		    margin-bottom: 2em;
-		}
-
-		.comment {
-			width: 100%;
-		    height: 20em;
-		    margin-bottom: 2em;
-		}
-
-		img {
-			float: left;
-    		width: 300px;
-		}
-
-		.captcha-input {
-			height: 2em;
-		    float: left;
-		    margin-top: 2em;
-		    margin-left: 8em;
-		}
-
-		.submit {
-		    width: 12em;
-		    height: 3em;
-	    	font-size: 18px;
-	    	border-radius: 4px;
-	    	margin: 0 auto;
-	    	margin-top: 2em;
-		}
-
-		.clear {
-			clear: both;
-		}
-
-		.form {
-    		width: 40%;
-    		margin: 0 auto;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ STATIC_URL }}/css/mollom.css">
 </head>
 
 
 <body>
 
 
-	<form action="check" method="post" class="form"> {% csrf_token %}
+	<form action="check" method="post" id="form" class="form"> {% csrf_token %}
 		<h1>Publish a post in our blog!</h1>
 
 		<input type="text" placeholder="Username" class="user">
@@ -62,14 +20,17 @@
 		<div>
 			<p>Please, write the text you see in the next image</p>
 
-			<img src="{{ captcha }}" alt="captcha image">
+			<img id="captcha" class="hidden" src="{{ captcha }}" alt="captcha image">
 			<input type="text" placeholder="Captcha..." name="answer" class="captcha-input">
 			<div class="clear"></div>
 
-			<input type="submit" value="Submit" class="submit">
+			<input type="button" value="Submit" id="btn-send">
 			<input type="hidden" name="sessionID" value="{{ sessionID }}">
 		</div>
 	</form>
+
+	<script type="text/javascript" src="{{ STATIC_URL }}/js/lib/jquery-2.0.1.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}/js/mollom.js"></script>
 
 </body>
 </html>
