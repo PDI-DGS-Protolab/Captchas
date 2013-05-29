@@ -1,0 +1,45 @@
+.user {
+    width: 100%;
+    height: 3em;
+    margin-bottom: 2em;
+}
+
+.comment {
+    width: 100%;
+    height: 20em;
+    margin-bottom: 2em;
+}
+
+img {
+    float: left;
+    width: 300px;
+}
+
+.captcha-input {
+    height: 2em;
+    float: left;
+    margin-top: 2em;
+    margin-left: 8em;
+}
+
+.button {
+    width: 12em;
+    height: 3em;
+    font-size: 18px;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-top: 2em;
+}
+
+.clear {
+    clear: both;
+}
+
+.form {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
