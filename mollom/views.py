@@ -22,7 +22,7 @@ def checkIfSpam(request):
     elif(spam == 2):  # Es spam
         resp = HttpResponse("spam", content_type="text/plain")
     elif(spam == 3):  # No es seguro que sea spam
-        captcha = mollom_api.getImageCaptcha(sessionID=None, authorIP=request.META['REMOTE_ADDR'])
+        captcha = mollom_api.getImageCaptcha(sessionID=None, authorIP=request.META.get(‘HTTP_X_FORWARDED_FOR’) or request.META.get(‘REMOTE_ADDR’))
         resp = HttpResponse(captcha['url'], content_type="text/plain")
     return resp
 

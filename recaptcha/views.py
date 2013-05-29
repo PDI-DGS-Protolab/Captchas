@@ -17,7 +17,7 @@ def checkCaptcha(request):
     check = captcha.submit( request.POST['recaptcha_challenge_field'],
                             request.POST['recaptcha_response_field'],
                             privateKey,
-                            '192.168.1.1')
+                            request.META.get(‘HTTP_X_FORWARDED_FOR’) or request.META.get(‘REMOTE_ADDR’))
     if check.is_valid:
         return render(request, 'success.html')
     else:

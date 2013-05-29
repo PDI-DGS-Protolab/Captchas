@@ -9,7 +9,7 @@ import recaptcha.views as recaptcha
 urlpatterns = patterns('',
                        url(r'^$', mollom.index),
                        url(r'^mollom/$', mollom.serveCaptcha),
-                       url(r'^mollom/checkSpam$',mollom.checkIfSpam)
+                       url(r'^mollom/checkSpam$',mollom.checkIfSpam),
                        url(r'^mollom/check$', mollom.checkCaptcha),
                        url(r'^recaptcha/$', recaptcha.serveCaptcha),
                        url(r'^recaptcha/check$', recaptcha.checkCaptcha),
