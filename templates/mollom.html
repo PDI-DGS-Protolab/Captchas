@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Mollom Captchas demo</title>
 
-	<link rel="stylesheet" href="{{ STATIC_URL }}/css/mollom.css">
+	<link rel="stylesheet" href="/static/mollom.css">
 </head>
 
 
@@ -19,9 +19,10 @@
 
 		<div>
 			<p>Please, write the text you see in the next image</p>
-
-			<img id="captcha" class="hidden" src="{{ captcha }}" alt="captcha image">
-			<input type="text" placeholder="Captcha..." name="answer" class="captcha-input">
+			<div id="showable" class="hidden">
+				<img id="captcha" src="{{ captcha }}" alt="captcha image">
+				<input type="text" placeholder="Captcha..." name="answer" class="captcha-input">
+			</div>
 			<div class="clear"></div>
 
 			<input type="button" value="Submit" id="btn-send">
@@ -29,8 +30,8 @@
 		</div>
 	</form>
 
-	<script type="text/javascript" src="{{ STATIC_URL }}/js/lib/jquery-2.0.1.min.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}/js/mollom.js"></script>
+	<script type="text/javascript" src="/static/jquery-2.0.1.min.js"></script>
+	<script type="text/javascript" src="/static/mollom.js"></script>
 
 </body>
 </html>

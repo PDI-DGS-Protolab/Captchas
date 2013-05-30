@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
 
 
-publicKey = '6Lf98eASAAAAAMARWX5AXv33iiHwS6E6I3tkVOFT'
-privateKey = '6Lf98eASAAAAALOFfNYMQEROO1VqJ9tjbHM9DuB9'
+publicKey = '6LfFEeISAAAAACxEsljeHqJh-9x57e4fhlosHKeP'
+privateKey = '6LfFEeISAAAAAC1KZ4LTLekta9DctMPnKZS1nAQQ'
 
 
 def serveCaptcha(request):
@@ -17,8 +17,8 @@ def checkCaptcha(request):
     check = captcha.submit( request.POST['recaptcha_challenge_field'],
                             request.POST['recaptcha_response_field'],
                             privateKey,
-                            request.META.get(‘HTTP_X_FORWARDED_FOR’) or request.META.get(‘REMOTE_ADDR’))
+                            request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR'))
     if check.is_valid:
         return render(request, 'success.html')
     else:
-        return render(request, 'failure.html') 
+        return render(request, 'failure.html')
