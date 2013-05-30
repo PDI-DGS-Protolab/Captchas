@@ -10,7 +10,7 @@ $(function() {
             console.err("The server does not respond");
         } else {
             if(data.status == "spam" || data.status == "ham"){
-                window.location.href = window.location.href+data.url;
+                window.location.href = data.url;
             }else{
                 form.find('#showable').removeClass('hidden');
                 form.find('#captcha')[0].src = data.url;
@@ -24,25 +24,23 @@ $(function() {
 
     var sendContentWithCaptcha = function() {
         var data = {
-            message : {
-                user       : form.find('.user').val(),
-                comment    : form.find('.comment').val(),
-                captcha    : form.find('#captcha').val(),
-                session_id : session_id
-            }
+            user       : form.find('.user').val(),
+            comment    : form.find('.comment').val(),
+            answer     : form.find('.captcha-input').val(),
+            session_id : session_id
         };
 
         var json = JSON.stringify(data);
-        $.post(window.location.href+"check", json);
+        $.post(window.location.href+"check", json,function(data){
+            window.location.href = data.url
+        });
     };
 
 
     var sendContent = function() {
         var data = {
-            message : {
-                user    : form.find('.user').val(),
-                comment : form.find('.comment').val()
-            }
+            user    : form.find('.user').val(),
+            comment : form.find('.comment').val()
         };
 
         var json = JSON.stringify(data);
